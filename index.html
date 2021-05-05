@@ -6,22 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>snake game</title>
     <link rel="shortcut icon" type="image/jpg" href="favicon/favicon.jpg" />
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/style.css" />
     <script src="js/app.js" type="module" defer></script>
   </head>
   <body class="dark">
-    <input type="button" class="btn start-btn" value="Start the Game" autofocus/>
+    <input
+      type="button"
+      class="btn start-btn"
+      value="Start the Game"
+      autofocus
+    />
     <div class="theme-btn-container">
       <div class="theme-btn-circle">
-        <input type="button" class="theme-btn light-btn" value="🟡">
-      <input type="button" class="theme-btn dark-btn" value="🌙">
+        <input type="button" class="theme-btn light-btn" value="🟡" />
+        <input type="button" class="theme-btn dark-btn" value="🌙" />
       </div>
-      
     </div>
     <div class="board-container">
       <div class="board"></div>
     </div>
-    <div class="game-over">
+    <div class="popup">
       <div class="msg-container">
         <h1>GAME OVER</h1>
         <div class="boundry">
@@ -34,9 +38,12 @@
         </div>
       </div>
       <div class="msg-container score">
-          <p class="score-line">You have scored </p>
-          <p class="score-points">Nill</p>
+        <p class="score-line">You have scored</p>
+        <p class="score-points">Nill</p>
       </div>
+    </div>
+    <div class="popup-counter">
+      <div class="counter">3</div>
     </div>
   </body>
 </html>

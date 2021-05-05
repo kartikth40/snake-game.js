@@ -1,6 +1,7 @@
 let direction = "right"
 
 function setKeyEvents() {
+  console.log("yo")
   document.addEventListener("keydown", (e) => {
     let key = e.code
     if (

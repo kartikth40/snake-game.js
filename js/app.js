@@ -3,11 +3,13 @@ import { update, randomFood } from "./update.js"
 import { draw } from "./draw.js"
 import { endGame } from "./endGame.js"
 
-let snake_speed = 6
+let initial_speed = 6
+let snake_speed = initial_speed
 const boardSize = 10
 const board = []
 let head = []
 let tail = []
+let firstTime = true
 
 for (let row = 0; row < boardSize; row++) {
   let currentRow = []
@@ -30,9 +32,8 @@ for (let row = 0; row < boardSize; row++) {
   board.push(currentRow)
 }
 
-document.querySelector(".start-btn").addEventListener("click", startTheGame)
-document.querySelector(".light-btn").addEventListener("click", changeTheme)
-document.querySelector(".dark-btn").addEventListener("click", changeTheme)
+document.querySelector(".start-btn").addEventListener("click", delayStart)
+document.querySelector(".theme-btn-circle").addEventListener("click", changeTheme)
 
 function changeTheme() {
   let body = document.body.classList
@@ -47,11 +48,26 @@ function changeTheme() {
   }
 }
 
+function delayStart() {
+  console.log(firstTime)
+  document.querySelector(".popup-counter").style.setProperty("display", "block")
+  for (let i = 0; i < 5; i++) {
+    setCounter(i)
+  }
+  function setCounter(i) {
+    setTimeout(() => {
+      if (i === 4) {
+        document.querySelector(".popup-counter").style.setProperty("display", "none")
+        startTheGame()
+      } else if (i === 3) document.querySelector(".counter").innerText = "GO"
+      else document.querySelector(".counter").innerText = 3 - i
+    }, 500 * i)
+  }
+}
+
 function startTheGame() {
   randomFood()
-  document
-    .querySelector(".start-btn")
-    .removeEventListener("click", startTheGame)
+  document.querySelector(".start-btn").removeEventListener("click", delayStart)
   document.querySelector(".start-btn").classList.add("disabled")
   document.getElementById("5-4").classList.add("snake-node")
 
@@ -60,7 +76,7 @@ function startTheGame() {
 
   tail = head
 
-  setKeyEvents()
+  if (firstTime) setKeyEvents()
   window.requestAnimationFrame(main)
 }
 
@@ -90,7 +106,9 @@ export function setValue(name, value) {
     snake_speed = value
   } else if (name === "score") {
     score = value
+  } else if (name === "firstTime") {
+    firstTime = false
   }
 }
 
-export { board, boardSize, head, tail, snake_speed }
+export { board, boardSize, head, tail, snake_speed, initial_speed, delayStart, firstTime }

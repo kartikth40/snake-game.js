@@ -1,4 +1,14 @@
-import { board, boardSize, head } from "./app.js"
+import {
+  board,
+  boardSize,
+  head,
+  tail,
+  snake_speed,
+  delayStart,
+  score,
+  setValue,
+  initial_speed,
+} from "./app.js"
 
 function draw() {
   for (let row = 0; row < boardSize; row++) {
@@ -29,4 +39,21 @@ function draw() {
   }
 }
 
-export { draw }
+function reset() {
+  for (let row = 0; row < boardSize; row++) {
+    for (let col = 0; col < boardSize; col++) {
+      let node = board[row][col]
+
+      node.nextNode = null
+      if (node.isSnake) node.isSnake = false
+      else if (node.isFood) node.isFood = false
+    }
+  }
+  setValue("head", [])
+  setValue("tail", [])
+  setValue("speed", initial_speed)
+  setValue("score", -1)
+  draw()
+}
+
+export { draw, reset }
